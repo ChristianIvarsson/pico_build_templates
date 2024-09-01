@@ -12,6 +12,7 @@ target_sources(interface_name INTERFACE
 # Have additional header folders etc? Add them here
 target_include_directories(interface_name INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}
+    .
 )
 
 # Add libraries that are needed by this interface library
