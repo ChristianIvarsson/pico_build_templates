@@ -1,0 +1,8 @@
+cd build and type:
+For Pico 1
+    cmake .. -G "Unix Makefiles"
+for Pico 2
+    cmake .. -G "Unix Makefiles" -DPICO_BOARD=pico2
+
+This will generate the required makefile
+After that you can just type make in the build folder

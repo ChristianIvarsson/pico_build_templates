@@ -1,0 +1,20 @@
+# Replace all instances of interface_name with the name of your interface
+
+add_library(interface_name INTERFACE)
+
+# Add PIO files if needed
+# pico_generate_pio_header(interface_name ${CMAKE_CURRENT_LIST_DIR}/somename.pio)
+
+target_sources(interface_name INTERFACE
+    ${CMAKE_CURRENT_LIST_DIR}/somename.c
+)
+
+# Have additional header folders etc? Add them here
+target_include_directories(interface_name INTERFACE
+    ${CMAKE_CURRENT_LIST_DIR}
+)
+
+# Add libraries that are needed by this interface library
+target_link_libraries(interface_name INTERFACE
+    pico_stdlib
+)

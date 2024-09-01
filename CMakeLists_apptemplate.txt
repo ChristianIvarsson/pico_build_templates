@@ -1,0 +1,91 @@
+# Example cmakefile. Modify according to needs
+
+cmake_minimum_required(VERSION 3.13)
+include(pico_sdk_import.cmake)
+set(CMAKE_C_STANDARD 11)
+pico_sdk_init()
+
+
+# -- Set project name - -
+project(examplename)
+
+# - - Uncomment to run from sram - -
+# set(RUNFROMSRAM 1)
+
+
+
+
+
+
+# - - Import custom interface library - -
+# include(${CMAKE_CURRENT_SOURCE_DIR}/path/to/CMakeLists.txt)
+
+
+
+if(DEFINED RUNFROMSRAM)
+    add_compile_definitions(PICO_NO_FLASH=1)
+endif()
+
+# - - Add global definitions if needed - -
+add_compile_definitions(
+    SOME_GLOBAL_DEFINE=1
+)
+
+
+
+# - - Some masochistic compiler flags - -
+add_compile_options(
+    -Wall
+    -Wpedantic
+)
+
+
+
+
+add_executable(${PROJECT_NAME})
+
+
+
+
+# - - Add source files - -
+target_sources(
+    ${PROJECT_NAME} PUBLIC
+    somename.c
+)
+
+
+
+# - - Add required libraries - -
+target_link_libraries(
+    ${PROJECT_NAME} PUBLIC
+    pico_stdlib
+)
+
+
+
+# - - Add additional header locations inside your project folder - -
+target_include_directories(
+    ${PROJECT_NAME} PRIVATE 
+    .
+)
+
+
+
+# - - Add pio file - -
+# pico_generate_pio_header(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/somepiofile.pio)
+
+
+
+if(NOT DEFINED RUNFROMSRAM)
+    pico_add_extra_outputs(${PROJECT_NAME})
+else()
+    pico_set_binary_type(${PROJECT_NAME} no_flash)
+endif()
+
+
+
+# - - Print over USB? - -
+pico_enable_stdio_usb(${PROJECT_NAME} 0)
+
+# - - Print over serial? - -
+pico_enable_stdio_uart(${PROJECT_NAME} 1)
