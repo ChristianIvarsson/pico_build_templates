@@ -1,6 +1,6 @@
 cd build and type:
 For Pico 1
-    cmake .. -G "Unix Makefiles"
+    cmake .. -G "Unix Makefiles" -DPICO_BOARD=pico
 for Pico 2
     cmake .. -G "Unix Makefiles" -DPICO_BOARD=pico2
 
